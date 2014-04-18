@@ -1,0 +1,573 @@
+save layers as animation + onion skin effect on layer transparencies
+open/import as a single function (for png or adraw)
+drag and drop functionality for file input / open with
+
+setSelection as undoable
+selection buffer not cleared properly when current layer is deleted
+
+canvas resize on load (png)
+save layered+png with one button
+edit at 1x 2x 4x 8x resolution options (and save the png at the lower resolution)
+
+OH AND YOU CAN CREATE SHORTCUTS BY HOVERING OVER ITEM IN MENU AND PRESSING KEYS!!!!!
+Canvas rotation
+you hover over your picture, press W, and it changes brush to one that you used on a piece you are hovering over. 
+
+repeater / area based reflections and rotations / n offsets along a modifiable (curving) path
+rot around an anchor that is offset per item
+draw visualizations of the repeater area
+and an option to adjust how it is repeated / how many times it is repeated
+and it is a sort of extra layer while it exists so it doesnt erase what is behind it when you decrease the number of reps
+
+reduce number of calls to bmp.draw by keeping seleciton as a buffer
+
+give frames - x buttons and make them resizeable but with a min size or ... the title if it is too long
+
+create canvas draw styles " pixel, sketch, line, vector, color "
+
+canvas resize/pan/zoom/move
+
+a "clear canvas" button
+
+improve fps or mouse movements per second or smooth mouse coordinates / line drawing
+look into wacom javascript with air
+
+ability to resize the grid circles
+vizualize transparency
+
+custom cursors for each tool
+
+ability to create geometric shapes under the sketch layer or in the polished layer for icons or w/e
+
+selectableText (not necessarily editable)
+textButton
+
+determine if difference in getMouse framerate and draw framerate is possible for higher resolution line drawing without hurting performance
+
+and able to edit last "draw" operation (like undo but only moving them and only them)
+for fine tuning after a freehand curve
+and autosplit long draws into parts
+
+ability to undo NewLayer() other than the first 1
+
+crop buffer to current half / quadrant of line of symmetry
+	var rectMask:Shape = new Shape();
+	rectMask.graphics.beginFill(0xFF0000, 1);
+	rectMask.graphics.drawRect(0, 0, 320, 240);
+	rectMask.graphics.endFill();
+	displayObjectToBeMasked.mask = rectMask;
+and mask buffer to canvas area
+
+be able to edit symmetry points
+
+could have line tend to sketch shape or autoline or variable line thickness
+or autosmoothed lines
+Ideally able to move sections with respect to lines of symmetry
+and able to reflect an existing section
+and disable the 'autofade' of 'other layers
+or colortint otherlayers
+
+need to be able to handle mouserelease even when canvas doesnt have mouse focus
+and rotate/zoom canvas
+(make it not a typical window but part of the background)
+
+radial reflection button (has an "int Slider" for number of segments) or an editable text box that assumes 1 segment if not a number of if <1 and assumes some max if > max
+slider indicators
+
+highlight and shadow layers
+with adjustable color and brightness / opacity after they are drawn
+possibly implemented as multiply /dodge / burn etc blend mode
+
+eraser
+
+fine line tool (that connects start and end points to previous lines and smooths its surves by adjusting previous or new points sometimes
+aka a bezier like tool but handdrawn and with curve - curve intersection endpoints if possible
+and node edittable
+
+maybe make the finetune adjustment tool work on right click (left click to draw line, right click to move/rotate/scale it based on whether or not r and s are also pressed or position of cursor with respect to last line) (draw a doodad around last line and make it selectable to adjust or ignorable)
+lots of hotkeys
+layer menu - clear, new, merge, reorder - blend mode
+
+have a progress bar for mass undo / redo (might be slow and easy to accidentally lose all progress) but convenient for large number of undos
+
+undo layer selection (not sure if necessary) however if selected layer is deleted and then undone it should still be selected
+
+alpha while not selected cannot exceed actual alpha
+
+add a visual response (on clear) on Undoable action ("Cleared layer1" "undid draw" "redo draw")
+
+draw buffer preview above current layer and buffer.alpha = currentlayer.alpha and buffer.addChildAt to position it between other layers
+(get active layer index + 1)
+
+do something with screenshot function (hotkey to take and save a screenshot)
+export jpg
+remember current file after open or save as
+remember last saved directory / last opened directory in app data
+
+remember position of doodads on app close / restart (app settings)
+windows menu to disable/enable doodads
+"new canvas" in menu for custom canvas size
+warning if current canvas is not empty
+ability to paste images to canvas
+import images as background
+consider saving undo data (opencanvas does I think)
+might be huge though
+maybe save last X undos
+filetype restriction by default during save,open, export and import
+
+get average fps over longer time sample to make it more accurate/smoother
+
+consider alphablend on the bitmap.draw(otherbitmap) function
+
+generalize clearlayer for selected layer
+and selectlayer for setalpha
+
+
+interface / implements undoable undoabledraw
+and undolist.draw() appends the new undoabledraw with the same parameters
+
+
+buttonGroup event: on select : either 1 event with custom property for group name
+or 1 event per group
+
+drag and drop to rearrange layers with cursor change if not hovering in a reasonable spot
+
+color palette:
+	buttongroup with constant color per button and an effect when selected (can be managed by buttonGroup)
+	aka
+	colorbuttongroup
+	
+toggle components of the overlay (grid, axis, diagonals)
+diagonal symmetry
+able to move/hide the circle / grid / diagonal thing and it will snap to x and/or y axis if near them or gridunit offset of axis
+
+sort frames based on active -> front with exception of canvas -> back
+
+sliders keep getting set to 0
+
+
+remember last tool / brushsize / color per layer and default to that 
+also initially have a "sketch" layer, "line" layer, "brush" layer
+
+add extension during save if it is missing
+add "all files" option for open
+make "widgets" extend frame and give them each their own constructors
+
+save palette with file and save "favourite palette"
+color wheel based on thetas and stuff
+just need a static image and the math to convert points to colors
+
+hue bar to have no fill and to have the selector change color based on preview color
+selectable text
+
+ignore hover if mouseDown and not active (aka click elsewhere then move mouse to hover)
+
+
+
+eraser implemented by setting blendmode for eraser object / mask
+	so buffer is black and white filled and masks activelayer
+	and undoable action draws buffer to avtivelayer with blendmode erase 
+	http://active.tutsplus.com/tutorials/games/introducing-blend-modes-in-flash/
+	
+undoable import, erase, other
+
+
+
+color pallete as a queue where it shows the last n colors used and a default n colors if no colors used and it only contains each color once
+alternatively filter colors by frequency of use and sort in a 2d way by hue, saturation, value
+
+
+buffer as a bmp, each line is immediately drawn to buffer, buffer is eventually drawn to canvas
+
+
+ideally import doesn't set filename but open does
+otherwise will be quicksaving as imported filename instead of as correct filename
+maybe just always saveAs for now
+
+
+undoable clearcanvas and clearlayer buttons
+undoable new layer button
+undoable remove layer button
+
+line with curveto and velocity based on previous offset -- only applies to changes in direction and significant magnitude
+
+
+able to past clipboard to canvas
+and prompt user: scale canvas to clipboard size or scale clipboard to canvas size or draw actual size (and crop to clipboard)
+
+
+draw buffer preview on top of layer preview with blend modes or whatever too
+
+composite actions like move:
+	cut
+	draw to buffer
+	/move/
+	paste
+single undo for the set of actions
+
+"recent" files
+
+saved in reverse order with respect to drawing
+
+invert tool icon color if color.value < 0.5 (on layer button)
+
+layer sorting
+new layer
+remove layeradd/remove layer is undoable
+sort layers also undoable
+
+canvas/tool/layer "options" gear button
+
+button isToggle group!=null and callback !=null
+.active while mouseDown even if not persistent state
+
+make canvas larger and
+make it in front of tool windows while drawing
+and make tool windows alpha
+
+reflect / rotate / scale / shift / shear layers or entire canvas
+
+
+want to be able to replace pdn needs with my own program:
+	rotating images
+	saving screenshots (from clipboard)
+	picking a color while coding
+	ctrl a c on canvas and ctrl x on paste
+		cut copy and paste events
+	del to clear selection (or layer)
+	mask draw operations to selection (fill, draw, outline)
+can't do alpha exactly so:
+	copy "alpha" as a string array or something
+	premultiply and then divide after the copy
+		or as a 2nd bitmap object (alpha channel bitmap)
+	should be able to handle alpha for same program copying or even cross - air copying
+		
+place buffer between layers (resort layers + buffer when layer changes)
+invert draw order of layers
+apply transparency to buffer
+render buffer on preview
+
+scrollable / resizable layers window
+move other layer buttons down after creating new layer
+set of layer buttons at top or bottom of layer window
+window toggles / appearance changes (transparency)
+
+give iconButtons an overlay when pressed to make it more obvious
+update activetool in tool list after pickign a layer (activelayer.activetool or whatever is right, but the button still has something else)
+
+
+a lot of buttons exist in the bunches that are removed and still have eventlisteners running
+make remove and sort buttons gray if there are no other layers
+
+alpha slider on color picker
+representation of transparent background as a pattern of white and gray
+
+make selected layer more obvious
+implement more undoableActions
+
+add some undo/redo/do debugging
+undo add layer
+undo setLayer
+
+
+pick some extension and make an icon for it and call it an airdraw file (adf)
+and have it save layers and their associated properties (alpha1, alpha2, bitmapData, vurrent Tool, current sym setting)
+
+and be able to load/open it
+
+
+
+toggleSymmetry buttons
+(in a new widgit)
+symmetric - both
+symmetric - horiz or vert
+	==
+asymmetric - horiz or vert
+asymettric - both
+so 3 (or 6) icons
+
+ability to choose a transparent background color (for previewing/ drawing purposes)
+or two colors
+
+resizeable preview
+and scaleable canvas resolution
+pixelated canvas should be easy to work with (would need buffer to be similarly pixelated and brush/grid to snap to pixels)
+
+scale slider, rotation button, setBackgroundColor button, for preview window
+
+"editing resolution" which is kept in file save, and "export" resolution for png saves and for preview
+expand/crop canvas tool (borders on canvas that can be dragged)
+
+
+two icons to toggle the lines of symmetry, four icons to indicate the state of symmetry where horiz and vert are rotated versions of same icon
+
+auto set selected layer to new layer
+
+AirDraw File .adf
+AlmostDraw .adr
+AirSketch
+Bink .bnk
+--drawing application
+--concept of "center"
+--easy to do some things
+--reflections
+--layers have associated tools and properties
+--good for rotateable objects
+LayerDraw .ldr or .ldf or .lpng
+ObjectDraw .odr .odf .opng
+DrawRot .drr
+
+saveas (filetype png or jpg or bmp or .adr)
+
+object oriented drawing?
+aka
+draw a unit
+extend it with unit1 (which has unit as a locked layer)
+add a component "weapon1" and position/rotate it
+and be able to edit unit1 by editing weapon1
+skeleton animation system for components/layers
+mark a selection as a component
+then be able to move it
+
+selection tool acts as reflection tool
+(select stuff to reflect it, should detect stuff that is already reflected or clear the reflected area before pasting there)
+
+air freezes occasionally
+almost definitely during the png load, possibly at other times as well
+
+
+create symmetry icons with the ribbon icon (rectangle + triangle + reflected) and rotate it or draw the line of symmetry clearly
+use colored icons
+
+
+handle the "cancel" button in an onLoad / browse for files
+
+clear undoable actions after load / import / new
+drag and drop layer organization
+"recent" items
+message if item no longer exists
+save as - pick type
+png compression (in png encoder options) / fast / small filesize
+
+
+
+popup message with OK button
+popup message with OK / Cancel Buttons and an onOK function
+popup on file load / import error
+have a popup on load/import if current layers exist
+have an indicator for whether or not changes have been made
+have UI to open multiple files and switchCanvas() functions
+
+save a version number in the file and have variations of the load function for the different versions
+or give a "list of properties" followed by "type" "key" "value" pairs and handle each key independantly and have a default for keys that don't exist
+warning: unsaveed changes on close
+
+mouse wheel to zoom in/out or change brush size
+min/max zoom values
+circle superimposed on canvas (that doesn't scale with canvas when it is zoomed), circle can be "dragged" to rotate camera
+widgit on intersections of circle and axis for canvas panning (and a hand icon drawn on them)
+option to hide this circle tool
+(it is a widgit that is always above canvas and always below other widgits)
+rectangle superimposed on canvas borders to change ratios / crop it, assumes symmetry (scales with respect to center)
+some indicator of canvas dimensions
+
+secretly duplicate canvas size and half the scale if the resolution is too low (from being resized)
+although leave "exportable resolution" unchanged
+
+the "X" next to a layer clears it if it is the only layer (but doesn't change the tool / akphas)
+
+create a factory class to create and manage singletons
+
+save canvas size in airdraw files and resize canvas on image import (option to resize canvas on paste)
+hotkey to crop to selection / autoselect whatever is pasted / the previous buffer
+small widgit to manip selection (move rotate zoom)
+and color tint / outline for selection
+
+
+highlight canvas border and resize tool when cursor is near the border
+or when cursor exceeds the border
+maybe make a drawborders function that is called every frame
+clear their graphics and then draw them again but maybe in a different spot or different thickness
+only change border hover status if not drawing
+
+issues with border hover and widgits in foreground
+
+seemingly random lag (some mouse events being handled from invisible objects?)
+onRemove / onDestroy methods for stuff that is removed (and a resume method)
+lag seems to be releated to the zoom feature
+only call drawBorders when borderHover changes or onResize
+
+use shape for temp stuff (it is a sprite that cannot have children but it still has a graphics object)
+
+colored outline of brush size + crosshair when drawing
+
+setBufferData (for ex, on resize) to update the minibuffer too
+
+replace Main.canvas with Canvas.singleton
+change linestyle for grid to makeit faster
+
+
+
+alpha brush:
+	buffer.alpha
+		(doesnt allow "rebrushing" for higher alpha)
+		(forces you to release mouse between rebrushes)
+	linestyle.alpha
+		overlap between lines at each cap
+	caps.NONE
+		misses spots, especially at corners
+	delayed draw (buffer as a graphics object instead of bitmapdata)
+		requires tmp to be visible and to not render to buffer
+		seems to work, but requires different code structure for alpha draws
+		some performance issues with large graphcis object
+		prevents alpha stacking even on significant rebrushing
+	NB. Paint . net has same issue with transparent circle/line draw but a higher resolution (fps) or forced intermediary points
+	I think best solution is to have the alpha dark spots and create intermediary points
+	perhaps pressure sensitive alpha could behave differently if I can implement it
+	a lot of intermediary points and a significantly reduced alpha makes this relatively effective (and a slow mouse movement)
+	
+alpha slider as part of colorPicker /
+colorPicker/paleete interaction
+alse eyedropper color picker
+mini canvas as palette
+	click on it to draw a spot, rightclick to "getcolor" a spot
+	it "autodraws" a gradient below the spot
+	or it has a row/column and you can click in the range to get the color or the button next to the range to set the color
+	range of values, not of saturation
+	
+minibuffer eraser erases too much (since it is not an immediate child of the layer preview)
+	but it could be!
+	and then layer.preview could be blendmodeLAYER
+	
+	
+create a slider/value pair object that allows input in either and sets it in the other
+and ignores invalid input and scales input to min,max / range
+
+split palette rows into 3 parts, value scale, lightness scale, saturation scale
+color pallette preview on hover or on clickdown/move
+PaletteAdd and PaletteRemove and Palette autosort by hue (n bitmaps instead of 1)
+(option to sort by hue or by lightness or by saturation)
+gradient value0 - custom value - value1 - saturation 0
+scale rowsize in the colorpalette based on #items
+and be able to add/remove items
+and add them in the middle based on hue
+
+create a GUI select class (creates a dropdown list of word + value associations and a callback onSelect0
+draw the color that created the row at the start of the row
+
+Partial undo tool for the most recent draw event only
+(a sliding bar that iterates between ~ 20 frames that were recorded during the draw event)
+so that if only a little bit of the line was bad you can keep the rest
+
+undoable pickColor (create a prevcolor variable at start of colorpicking / colorBmp.onclick)
+undoable add/remove palette colors
+
+tool cursor to change
+undoable paste with respect to resizeCanvas
+
+copy with alpha for layer to layer etc
+(dont use clipboard)
+
+paint bucket and alpha tools
+
+"OUt of MEMory" on attempt to save (1.8gb)
+LOL
+I probably had around 300 undoable actions, 1 bitmap data each
+thats a lot of memory
+autoremoving entries of undolist after 20 entries now
+
+scrollableFrame (for layerpicker)
+frameH contentH
+
+init alpha for sketch layer
+
+eraser as a toggle rather than a tool (can fine line erase or brush erase)
+same for selection, and same for polygon tools (can draw / select, or erase a polygon/area/curve/line/fill)
+fill select
+fill erase
+fill recolor
+
+initial alpha slider
+layer color preview with alpha
+
+evaluate toBYtes during or after the saveAs popup so user is not like "why is there no save popup yet" while it is evaluating
+especially the bytes.compress thing
+
+make it easier to select pure white, pure black, alpha 0, alpha 1
+
+need to have a 1 button way to switch to eraser (lclick/rclick) or have two buttosn per tool (draw line erase thick line, draw thick line, erase thicker line)
+and an indicator of erasing on cursor
+pencil eraser is uselss and eraser toggle unintuitive
+diagonal reflections
+recolor/fill tool / color adgustment for entire layer (level curves for colors)
+
+save as adr -> save as png -> save normal will save airdraw format as a png file
+
+supersampling on shrink
+
+rotate / pan / and zoom canvas on screen
+and rotate / pan / scale content of screen
+and recolor tool
+
+need a way to keep selectManip onscreen and not necessarily behind the ui frames
+
+manipulator as a child of canvas so it can be panned with respect to canvas axis / inherits canvas orientation
+
+ability to mark selection/selected area as having symmetry
+ability to enable diagonal symmetry and scope of symmetry (only reflect things near this line segment)
+
+
+make a lof of canvas components into shapes not sprites
+and only count border hover if e.target of mouseMove is the border object/ it is the canvas and not some overlay
+
+improve behaviour with respect to screen size (min screen size, handle resize event, move doodads away from nearest edge / keep on screen)
+
+activelayer masked by selection or selection buffer masked with selection
+selectionBuffer.draw(,selectionarea.transform.inverse)
+
+manipAngle to change with rotate
+and manipAngle to be initialized based on the angle between point1 and point2?
+
+vertical diagonalDrag or have diagonalDrag extend startDrag to have bounds
+rotation of pan object so that it can have a rotrectangle to make it more complete
+and then move it over a bit
+do it with closed=false and some lineTo calls
+
+selection and cursor info in an overlay or next to the cursor or on the bottom bar of the screen
+(selection.center, mouse/canvas, selection radius, selection rotation
+
+stage resize event!
+
+use selection as mask for buffer
+would need the intersection of selection and canvas?
+or draw to selectionBuffer while selection is nonNull
+
+selection with Rclick?
+
+have sidebars that content can be docked to
+and a bottom bar with info
+
+Drawing with repetition (a series of dotted rectangles/lines that are repeated)
+ability to repeat/reflect selection
+
+if reflection is specific to an area, 
+selection widgit as a bounding rectangle
+need a boundingRect in order to create a bitmapData
+could use the rect that bounds the circle for now
+or could assume canvas size for selectionBmpData
+
+widgit to edit the selectionArea
+and widgit to edit the selectionContent
+
+or reflection /repetition with an offset
+ability to move selection center point to change rotation/scale behaviour
+
+only copy image to clipboard if canvas has focus
+otherwise copy active color or something
+
+
+rotated draw from selection move seems really fuzzy edged (rough)
+tried drawing to 8x bmpdata
+tried container sprite
+tried drawWithQuality and air version swf version
+unrotateBmpHolder before toBuffer
